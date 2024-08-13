@@ -1,0 +1,8 @@
+.*
+__pycache__/
+!.gitignore
+
+*.html
+*.json
+*.png
+!test.json

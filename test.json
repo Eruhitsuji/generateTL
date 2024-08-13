@@ -1,0 +1,48 @@
+{
+    "layout": {
+      "title": "Timeline",
+      "xaxis_title": "Time",
+      "yaxis_title": "Series",
+      "yaxis_showticklabels": true,
+      "showlegend": true
+    },
+    "out_img":{
+        "path":"test.png",
+        "width":1200,
+        "height":600,
+        "scale":1
+    },
+    "out_html_path":"test.html",
+    "data": {
+      "series1": {
+        "intervals": [
+          {"start": "2024-01-01", "end": "2024-01-05", "description": "Event A", "width": 1.25},
+          {"start": "2024-02-01", "end": "2024-02-03", "description": "Event B", "width": 1.0}
+        ],
+        "color": ""
+      },
+      "series2": {
+        "intervals": [
+          {"start": "2024-01-06", "end": "2024-01-07", "description": "Event C", "width": 1.25},
+          {"start": "2024-01-11", "end": "2024-01-12", "description": "Event D", "width": 1.0}
+        ],
+        "color": ""
+      },
+      "series3": {
+        "intervals": [
+          {"start": "2024-01-10", "end": "2024-01-13", "description": "Event E", "width": 1.25},
+          {"start": "2024-03-19", "end": "2024-03-20", "description": "Event F", "width": 1.0}
+        ],
+        "color": "rgba(0,255,0,0.5)",
+        "bgcolor":"rgba(255, 255, 255, 0.7)"
+      },
+      "series4": {
+        "intervals": [
+          {"start": "2024-01-10", "end": "2024-01-13", "description": "Event G", "width": 1.25}
+        ],
+        "color": "black",
+        "bgcolor":"white"
+      }
+    }
+  }
+  
