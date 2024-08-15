@@ -51,6 +51,18 @@ def createTimeline(json_path:str,img_save:bool=True,img_show:bool=True,html_save
             if(sorted_intervals[i]["end"]>sorted_intervals[i+1]["start"]):
                 print(f"Warning : Overlapping intervals detected in series")
 
+    def toDatetime(s:str):
+        datetime_formats=["%Y-%m-%d","%Y/%m/%d"]
+        if(s=="now"):
+            return settings.get("now",DEFAULT_SETTINGS["now"])
+        else:
+            for dt_fmt in datetime_formats:
+                try:
+                    return datetime.strptime(s,dt_fmt)
+                except ValueError:
+                    continue
+            raise ValueError(f"Date format not recognized: {s}")
+
     for i,(series,series_info) in enumerate(series_data.items()):
         intervals=series_info.get("intervals",DEFAULT_SERIES_INFO["intervals"])
         color=series_info.get("color",DEFAULT_SERIES_INFO["color"])
@@ -64,12 +76,9 @@ def createTimeline(json_path:str,img_save:bool=True,img_show:bool=True,html_save
                 
             for interval in intervals:
                 if("start" in interval and "end" in interval):
+                    start=toDatetime(interval["start"])
+                    end=toDatetime(interval["end"])
 
-                    start=datetime.strptime(interval["start"],"%Y-%m-%d")
-                    if(interval["end"]=="now"):
-                        end=settings.get("now",DEFAULT_SETTINGS["now"])
-                    else:
-                        end=datetime.strptime(interval["end"],"%Y-%m-%d")
                     description=interval.get("description",DEFAULT_INTERVAL["description"])
                     width=interval.get("width",DEFAULT_INTERVAL["width"])
                     
