@@ -6,6 +6,9 @@ import plotly.io as pio
 import plotly.colors as pc
 
 def createTimeline(json_path:str,img_save:bool=True,img_show:bool=True,html_save:bool=False):
+    DEFAULT_SETTINGS={
+        "now":datetime.now()
+    }
     DEFAULT_LAYOUT_DICT={
         "title":"Timeline",
         "xaxis_title":"Time",
@@ -32,6 +35,7 @@ def createTimeline(json_path:str,img_save:bool=True,img_show:bool=True,html_save
     with open(json_path,mode="r",encoding="utf-8") as f:
         data=json.load(f)
 
+    settings=data.get("settings",DEFAULT_SETTINGS)
     layout_settings=data.get("layout",DEFAULT_LAYOUT_DICT)
     series_data=data.get("data",{})
     out_img_settings=data.get("out_img",DEFAULT_OUT_IMG_DICT)
@@ -63,7 +67,7 @@ def createTimeline(json_path:str,img_save:bool=True,img_show:bool=True,html_save
 
                     start=datetime.strptime(interval["start"],"%Y-%m-%d")
                     if(interval["end"]=="now"):
-                        end=datetime.now()
+                        end=settings.get("now",DEFAULT_SETTINGS["now"])
                     else:
                         end=datetime.strptime(interval["end"],"%Y-%m-%d")
                     description=interval.get("description",DEFAULT_INTERVAL["description"])
