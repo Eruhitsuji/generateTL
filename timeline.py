@@ -7,7 +7,7 @@ import plotly.colors as pc
 
 def createTimeline(json_path:str,img_save:bool=True,img_show:bool=True,html_save:bool=False):
     DEFAULT_SETTINGS={
-        "now":datetime.now()
+        "now":datetime.now().strftime("%Y-%m-%d")
     }
     DEFAULT_LAYOUT_DICT={
         "title":"Timeline",
@@ -54,14 +54,14 @@ def createTimeline(json_path:str,img_save:bool=True,img_show:bool=True,html_save
     def toDatetime(s:str):
         datetime_formats=["%Y-%m-%d","%Y/%m/%d"]
         if(s=="now"):
-            return settings.get("now",DEFAULT_SETTINGS["now"])
-        else:
-            for dt_fmt in datetime_formats:
-                try:
-                    return datetime.strptime(s,dt_fmt)
-                except ValueError:
-                    continue
-            raise ValueError(f"Date format not recognized: {s}")
+            s=settings.get("now",DEFAULT_SETTINGS["now"])
+    
+        for dt_fmt in datetime_formats:
+            try:
+                return datetime.strptime(s,dt_fmt)
+            except ValueError:
+                continue
+        raise ValueError(f"Date format not recognized: {s}")
 
     for i,(series,series_info) in enumerate(series_data.items()):
         intervals=series_info.get("intervals",DEFAULT_SERIES_INFO["intervals"])
